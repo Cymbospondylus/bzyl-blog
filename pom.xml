@@ -6,8 +6,13 @@
 
     <groupId>site.bzyl</groupId>
     <artifactId>bzyl-blog</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>blog-framework</module>
+        <module>blog-admin</module>
+        <module>blog-foreground</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +22,7 @@
     <dependencyManagement>
 
         <dependencies>
-            <!-- SpringBoot的依赖配置-->  <!-- 等价于继承了spring-boot-starter-parent工程 -->
+            <!-- SpringBoot的依赖配置-->  <!-- 引入依赖spring-boot-dependencies等价于继承了spring-boot-starter-parent工程 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -44,7 +49,7 @@
                 <version>3.4.3</version>
             </dependency>
 
-            <!--阿里云OSS-->
+            <!--阿里云OSS--> <!--Object Storage Service-->
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
