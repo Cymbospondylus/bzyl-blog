@@ -2,8 +2,10 @@ package site.bzyl.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.stereotype.Service;
-import site.bzyl.entity.Article;
+import site.bzyl.domain.entity.Article;
+import site.bzyl.domain.ResponseResult;
 
 @Service
 public interface ArticleService extends IService<Article> {
+    ResponseResult<Article> hotArticleList();
 }

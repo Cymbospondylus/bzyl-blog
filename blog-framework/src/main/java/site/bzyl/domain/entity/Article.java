@@ -1,4 +1,4 @@
-package site.bzyl.entity;
+package site.bzyl.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;

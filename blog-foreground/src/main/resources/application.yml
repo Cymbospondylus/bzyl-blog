@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 7777
 spring:
   datasource:
     username: root
@@ -13,7 +13,7 @@ spring:
 
 mybatis-plus:
   configuration:
-    # 日志
+    # 日志 配置过后可以看到mp生成的sql语句及参数
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
