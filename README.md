@@ -1,2 +1,2 @@
-# 一个朴实无华的博客系统
-> wow
+# Springboot + Vue の Blog
+> 前后端分离博客系统

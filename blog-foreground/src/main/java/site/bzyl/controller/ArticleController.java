@@ -9,6 +9,9 @@ import site.bzyl.domain.entity.Article;
 import site.bzyl.domain.ResponseResult;
 import site.bzyl.service.ArticleService;
 
+import java.util.function.Function;
+import java.util.function.IntConsumer;
+
 
 @RestController
 @RequestMapping("/article")
@@ -19,10 +22,18 @@ public class ArticleController {
 
     /**
      * 热门文章列表
+     *
      * @return
      */
     @GetMapping("/hotArticleList")
     public ResponseResult<Article> getHotArticleList() {
         return articleService.hotArticleList();
     }
+
+
+    public static void main(String[] args) {
+
+    }
 }
+
+
