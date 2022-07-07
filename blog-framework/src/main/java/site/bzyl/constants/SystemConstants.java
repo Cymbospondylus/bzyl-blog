@@ -1,4 +1,4 @@
-package site.bzyl.constant;
+package site.bzyl.constants;
 
 public class SystemConstants {
     // 文章发布状态

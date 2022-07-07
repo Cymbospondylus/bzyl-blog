@@ -3,14 +3,16 @@ package site.bzyl.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import site.bzyl.constant.SystemConstants;
+import site.bzyl.constants.SystemConstants;
 import site.bzyl.dao.ArticleDao;
 import site.bzyl.domain.entity.Article;
 import site.bzyl.domain.ResponseResult;
 import site.bzyl.domain.vo.HotArticleListVo;
 import site.bzyl.service.ArticleService;
+import site.bzyl.utils.BeanCopyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +31,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
         Page<Article> page = new Page<>(SystemConstants.HOT_ARTICLE_LIST_CURRENT, SystemConstants.HOT_ARTICLE_LIST_SIZE_PER_PAGE);
         page(page, lqw);
         List<Article> articleList = page.getRecords();
-        List<HotArticleListVo> hotArticleListVos = new ArrayList<>();
-        for (Article article : articleList) {
-            HotArticleListVo vo = new HotArticleListVo();
-            BeanUtils.copyProperties(article, vo);
-            hotArticleListVos.add(vo);
-        }
-        // 封装对象并返回
+        // 调用工具类, 拷贝成vo对象
+        List<HotArticleListVo> hotArticleListVos = BeanCopyUtils.copyBeanList(articleList, HotArticleListVo.class);
+        // 返回响应对象
         return ResponseResult.okResult(hotArticleListVos);
 
     }
