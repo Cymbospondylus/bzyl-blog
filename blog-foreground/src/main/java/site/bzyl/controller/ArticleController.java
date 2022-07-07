@@ -9,10 +9,6 @@ import site.bzyl.domain.entity.Article;
 import site.bzyl.domain.ResponseResult;
 import site.bzyl.service.ArticleService;
 
-import java.util.function.Function;
-import java.util.function.IntConsumer;
-
-
 @RestController
 @RequestMapping("/article")
 @Slf4j
