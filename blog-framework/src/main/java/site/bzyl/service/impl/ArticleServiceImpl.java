@@ -12,9 +12,11 @@ import site.bzyl.dao.CategoryDao;
 import site.bzyl.domain.entity.Article;
 import site.bzyl.domain.ResponseResult;
 import site.bzyl.domain.entity.Category;
+import site.bzyl.domain.vo.ArticleDetailVo;
 import site.bzyl.domain.vo.ArticleVo;
 import site.bzyl.domain.vo.HotArticleListVo;
 import site.bzyl.domain.vo.PageVo;
+import site.bzyl.enums.AppHttpCodeEnum;
 import site.bzyl.service.ArticleService;
 import site.bzyl.utils.BeanCopyUtils;
 
@@ -74,5 +76,24 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
         PageVo<ArticleVo> articlePageVo = new PageVo<>(articleVos, page.getTotal());
         //返回结果
         return ResponseResult.okResult(articlePageVo);
+    }
+
+    @Override
+    public ResponseResult<Article> getArticleDetail(Long id) {
+        // 根据id查询文章
+        Article article = getById(id);
+        if (article == null) {
+            // id查找不到对应文章
+            return ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+        }
+        // 根据分类id获取分类名
+        Category category = categoryDao.selectById(article.getCategoryId());
+        if (category != null) {
+            article.setCategoryName(category.getName());
+        }
+        // 封装成vo对象
+        ArticleVo articleVo = BeanCopyUtils.copyBean(article, ArticleDetailVo.class);
+        // 封装成响应结果
+        return ResponseResult.okResult(articleVo);
     }
 }
