@@ -13,4 +13,8 @@ public class SystemConstants {
     public static final Integer HOT_ARTICLE_LIST_CURRENT = 1;
     public static final Integer HOT_ARTICLE_LIST_SIZE_PER_PAGE = 10;
 
+    // 友链状态： 可用、不可用、待审核
+    public static final Integer LINK_STATUS_AVAILABLE = 0;
+    public static final Integer LINK_STATUS_UNAVAILABLE = 1;
+    public static final Integer LINK_STATUS_PENDING = 2;
 }
