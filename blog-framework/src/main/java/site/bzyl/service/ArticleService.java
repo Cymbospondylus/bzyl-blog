@@ -8,4 +8,6 @@ import site.bzyl.domain.ResponseResult;
 @Service
 public interface ArticleService extends IService<Article> {
     ResponseResult<Article> hotArticleList();
+
+    ResponseResult<Article> getArticleList(Long pageNum, Long pageSize, Long categoryId);
 }

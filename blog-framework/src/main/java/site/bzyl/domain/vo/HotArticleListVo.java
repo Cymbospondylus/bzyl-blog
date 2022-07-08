@@ -14,6 +14,8 @@ import java.io.Serializable;
  * 同时转json给前端需要get方法, 没有的话就会报这个错
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class HotArticleListVo implements Serializable {
     private Long id;
     //标题
