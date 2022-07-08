@@ -12,9 +12,11 @@ import site.bzyl.dao.CategoryDao;
 import site.bzyl.domain.ResponseResult;
 import site.bzyl.domain.entity.Article;
 import site.bzyl.domain.entity.Category;
+import site.bzyl.service.ArticleService;
 import site.bzyl.service.CategoryService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 分类表(Category)表服务实现类
@@ -25,26 +27,34 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, Category> implements CategoryService {
 
+    // 注入service而不是dao
     @Autowired
-    private CategoryDao categoryDao;
-    @Autowired
-    private ArticleDao articleDao;
+    private ArticleService articleService;
 
     @Override
     public ResponseResult<Category> getCategoryList() {
         // 从bzyl_article表中查询status=0的所有文章对应的category_id, 返回数组并去重
         LambdaQueryWrapper<Article> lqwArticle = new LambdaQueryWrapper<>();
-        // 查询所有status=0的文章
-        lqwArticle.eq(Article::getStatus, SystemConstants.ARTICLE_STATUS_PUBLISHED);
-        List<Article> articles = articleDao.selectList(lqwArticle);
-        System.out.println(articles);
+        // 查询所有正常发布(status=0)的文章
+//        lqwArticle.eq(Article::getStatus, SystemConstants.ARTICLE_STATUS_PUBLISHED);
+        // 获取所有文章的分类id
+        List<Article> articleList = articleService.list(lqwArticle);
+        List<Long> categoryIds = articleList.
+                stream()
+                .map(article -> article.getCategoryId())
+                .distinct()
+                .collect(Collectors.toList());
+        // 根据id查询所有可用分类, 因为是在CategoryServiceImpl里写的, 所以不用注入直接调用mp提供的方法
+        // 同时进行去重和判断分类是否可用
+        List<Category> categoryList = listByIds(categoryIds)
+                .stream()
+                .distinct()
+                .filter(category -> SystemConstants.CATEGORY_STATUS_ENABLED.equals(category.getStatus()))
+                .collect(Collectors.toList());
 
+       // 封装成vo
 
-        LambdaQueryWrapper<Category> lqwCategory = new LambdaQueryWrapper();
-        // 展示正常状态的分类(status = 0)
-        lqwCategory.eq(Category::getStatus, SystemConstants.CATEGORY_STATUS_ENABLED);
-
-        return null;
+        return ResponseResult.okResult(categoryList);
     }
 
 }

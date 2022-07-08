@@ -29,7 +29,7 @@ public class Category  {
     //描述
     private String description;
     //状态0:正常,1禁用
-    private String status;
+    private Integer status;
     
     private Long createBy;
     

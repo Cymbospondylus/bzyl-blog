@@ -16,20 +16,14 @@ public class ArticleController {
     @Autowired
     private ArticleService articleService;
 
-    /**
-     * 热门文章列表
-     *
-     * @return
-     */
+
     @GetMapping("/hotArticleList")
     public ResponseResult<Article> getHotArticleList() {
         return articleService.hotArticleList();
     }
 
 
-    public static void main(String[] args) {
 
-    }
 }
 
 

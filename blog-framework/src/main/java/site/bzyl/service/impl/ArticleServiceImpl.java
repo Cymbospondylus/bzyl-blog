@@ -3,8 +3,6 @@ package site.bzyl.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.poi.ss.formula.functions.T;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import site.bzyl.constants.SystemConstants;
 import site.bzyl.dao.ArticleDao;
@@ -14,7 +12,6 @@ import site.bzyl.domain.vo.HotArticleListVo;
 import site.bzyl.service.ArticleService;
 import site.bzyl.utils.BeanCopyUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
