@@ -12,8 +12,10 @@ import site.bzyl.dao.CategoryDao;
 import site.bzyl.domain.ResponseResult;
 import site.bzyl.domain.entity.Article;
 import site.bzyl.domain.entity.Category;
+import site.bzyl.domain.vo.CategoryListVo;
 import site.bzyl.service.ArticleService;
 import site.bzyl.service.CategoryService;
+import site.bzyl.utils.BeanCopyUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,8 +55,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, Category> impl
                 .collect(Collectors.toList());
 
        // 封装成vo
+        List<CategoryListVo> categoryListVos = BeanCopyUtils.copyBeanList(categoryList, CategoryListVo.class);
 
-        return ResponseResult.okResult(categoryList);
+        return ResponseResult.okResult(categoryListVos);
     }
 
 }
