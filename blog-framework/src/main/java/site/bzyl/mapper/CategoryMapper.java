@@ -1,4 +1,4 @@
-package site.bzyl.dao;
+package site.bzyl.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,7 +11,7 @@ import site.bzyl.domain.entity.Category;
  * @since 2022-07-07 21:06:06
  */
 @Mapper
-public interface CategoryDao extends BaseMapper<Category> {
+public interface CategoryMapper extends BaseMapper<Category> {
 
 }
 

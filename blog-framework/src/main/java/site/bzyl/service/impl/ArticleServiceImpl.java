@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.bzyl.constants.SystemConstants;
-import site.bzyl.dao.ArticleDao;
-import site.bzyl.dao.CategoryDao;
+import site.bzyl.mapper.ArticleMapper;
+import site.bzyl.mapper.CategoryMapper;
 import site.bzyl.domain.entity.Article;
 import site.bzyl.domain.ResponseResult;
 import site.bzyl.domain.entity.Category;
@@ -21,13 +21,12 @@ import site.bzyl.utils.BeanCopyUtils;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
-public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> implements ArticleService {
+public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
     @Autowired
-    private CategoryDao categoryDao;
+    private CategoryMapper categoryMapper;
     @Override
     public ResponseResult<Article> hotArticleList() {
         LambdaQueryWrapper<Article> lqw = new LambdaQueryWrapper<>();
@@ -68,7 +67,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
         List<Article> articles = page.getRecords();
         // 直接对 articles操作会影响page中的数据（why）
         articles.stream()
-                .map(article -> article.setCategoryName(categoryDao.selectById(article.getCategoryId()).getName()))
+                .map(article -> article.setCategoryName(categoryMapper.selectById(article.getCategoryId()).getName()))
                 .collect(Collectors.toList());
         // 封装结果
         List<ArticleVo> articleVos = BeanCopyUtils.copyBeanList(page.getRecords(), ArticleVo.class);
@@ -86,7 +85,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleDao, Article> impleme
             return ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
         }
         // 根据分类id获取分类名
-        Category category = categoryDao.selectById(article.getCategoryId());
+        Category category = categoryMapper.selectById(article.getCategoryId());
         if (category != null) {
             article.setCategoryName(category.getName());
         }

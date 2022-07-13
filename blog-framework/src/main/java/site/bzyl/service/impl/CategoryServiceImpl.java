@@ -1,14 +1,11 @@
 package site.bzyl.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import site.bzyl.constants.SystemConstants;
-import site.bzyl.dao.ArticleDao;
-import site.bzyl.dao.CategoryDao;
+import site.bzyl.mapper.CategoryMapper;
 import site.bzyl.domain.ResponseResult;
 import site.bzyl.domain.entity.Article;
 import site.bzyl.domain.entity.Category;
@@ -27,7 +24,7 @@ import java.util.stream.Collectors;
  * @since 2022-07-07 21:06:06
  */
 @Service
-public class CategoryServiceImpl extends ServiceImpl<CategoryDao, Category> implements CategoryService {
+public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
 
     // 注入service而不是dao
     @Autowired

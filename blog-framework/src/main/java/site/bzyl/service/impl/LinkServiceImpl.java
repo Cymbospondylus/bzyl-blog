@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import site.bzyl.constants.SystemConstants;
-import site.bzyl.dao.LinkDao;
+import site.bzyl.mapper.LinkMapper;
 import site.bzyl.domain.ResponseResult;
 import site.bzyl.domain.entity.Link;
 import site.bzyl.domain.vo.LinkVo;
 import site.bzyl.service.LinkService;
 import site.bzyl.utils.BeanCopyUtils;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * 友链(Link)表服务实现类
@@ -20,7 +20,7 @@ import java.util.List;
  * @since 2022-07-08 21:21:30
  */
 @Service
-public class LinkServiceImpl extends ServiceImpl<LinkDao, Link> implements LinkService {
+public class LinkServiceImpl extends ServiceImpl<LinkMapper, Link> implements LinkService {
 
     @Override
     public ResponseResult<Link> getAllLink() {

@@ -1,4 +1,4 @@
-package site.bzyl.dao;
+package site.bzyl.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import site.bzyl.domain.entity.Link;
@@ -11,7 +11,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-07-08 21:21:30
  */
 @Mapper
-public interface LinkDao extends BaseMapper<Link> {
+public interface LinkMapper extends BaseMapper<Link> {
 
 }
 
